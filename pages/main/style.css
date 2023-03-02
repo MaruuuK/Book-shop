@@ -1,0 +1,132 @@
+/**********************FONTS*********************/
+
+@font-face {
+    font-family: 'georgia normal';
+    src: url('../../assets/fonts/georgia.ttf');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'georgia bold';
+    src: url('../../assets/fonts/georgiab.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'georgia italic';
+    src: url('../../assets/fonts/georgiai.ttf');
+    font-style: italic;
+}
+
+/*******************GENERAL**********************/
+
+* {
+    box-sizing: border-box;
+    font-weight: 400;
+    font-family: 'georgia normal', sans-serif;
+    font-size: 15px;
+
+}
+
+body {
+    background-color: #fff7f3;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+body.overlay {
+    overflow: hidden;
+}
+
+body.overlay::after {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(41, 41, 41, 0.6);
+}
+
+/*******************BTN**********************/
+
+.btn {
+    display: inline-block;
+    padding: 15px 20px;
+    background-color: #fe7d4e;
+    border-radius: 100px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    color: #f3d0b8;
+    font-family: 'georgia bold', sans-serif;
+}
+
+/*******************HEADER**********************/
+
+.main-content h1 {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.main-content h1 .word-1 {
+    font-size: 1.5em;
+    color: #fb8e63;
+}
+
+.main-content h1 .word-2 {
+    font-size: 1.5em;
+    color: #74381f;
+}
+
+/*******************BANNER**********************/
+
+.main-content .banner-section {
+    display: flex;
+    gap: 50px;
+    padding: 40px;
+    justify-content: center;
+    background-color: #fcfafa;
+}
+
+.banner-section img {
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.banner-section .banner-info {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    max-width: 550px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.banner-info h3 {
+    margin: 10px 0 0;
+    font-family: 'georgia bold', sans-serif;
+    text-transform: capitalize;
+    font-size: 50px;
+    line-height: 60px;
+    color: #74381f;
+    letter-spacing: 0.06em;
+}
+
+.banner-info p {
+    margin: 0;
+    color: #6a5247;
+    font-size: 25px;
+    line-height: 35px;
+}
+
+.btn-explore-more {
+    padding: 15px 45px;
+}
