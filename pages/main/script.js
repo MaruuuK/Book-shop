@@ -178,6 +178,7 @@ catalog.appendChild(catalog_h3);
         btn_showMore.classList.add('btn');
         btn_showMore.classList.add('btn-show-more');
         btn_showMore.textContent = 'Show more';
+        btn_showMore.setAttribute('data-id', i);
 
         const btn_addToBag = document.createElement('span');
         btn_addToBag.classList.add('btn');
@@ -197,19 +198,110 @@ catalog.appendChild(catalog_h3);
         book_card.appendChild(book_info);
         catalog.appendChild(book_card);
 
-        // book_card.addEventListener('click', clickPopup);
+        btn_showMore.addEventListener('click', clickPopup);
     }
 })()
 
+
+
+
+//POPUP
+const popup = document.createElement('div');
+popup.setAttribute('class', 'popup-window');
+
+const btn_close = document.createElement('span');
+btn_close.classList.add('btn-close');
+
+
+const book_description = document.createElement('div');
+book_description.classList.add('book-description');
+
+const title = document.createElement('h4');
+
+const author = document.createElement('p');
+author.classList.add('author');
+
+const description = document.createElement('p');
+description.classList.add('description');
+
+const price = document.createElement('h5');
+price.classList.add('price');
+
+popup.appendChild(btn_close);
+
+book_description.appendChild(title);
+book_description.appendChild(author);
+book_description.appendChild(description);
+book_description.appendChild(price);
+
+popup.appendChild(book_description);
+
+
+function clickPopup(e) {
+    let idCard = e.currentTarget.dataset.id
+    title.innerHTML = booksArr[idCard].title;
+    author.innerHTML = `by ${booksArr[idCard].author}`;
+    description.innerHTML = booksArr[idCard].description;
+    price.innerHTML = `$${booksArr[idCard].price}`;
+    body.classList.add('overlay');
+    popup.classList.add('open');
+}
+
+btn_close.addEventListener('click', closeOverlay);
+
+
+//OVERLAY
+
+let body = document.querySelector('body');
+
+function closeOverlay() {
+    body.classList.remove('overlay');
+    popup.classList.remove('open');
+}
+
+body.addEventListener('click', function (e) {
+    if (e.target.nodeName === 'BODY') {
+        closeOverlay();
+    }
+});
+
+window.addEventListener('keyup', function (e) {
+    if (e.key === 'Escape') {
+        closeOverlay();
+    }
+});
+
+//ORDER BOOKS
 
 const order = document.createElement('div');
 order.setAttribute('id', 'order');
 
 const order_h3 = document.createElement('h3');
 order_h3.textContent = 'Order books';
+
+
+
+
+const total = document.createElement('p');
+total.classList.add('total-price');
+total.innerHTML = `Total: $`;            //add sum of books in bag
+
+const btn_confirm = document.createElement('a');
+btn_confirm.classList.add('btn-confirm-order');
+btn_confirm.classList.add('btn');
+btn_confirm.classList.add('btn');
+btn_confirm.setAttribute('href', '../../pages / order / index.html');
+btn_confirm.textContent = 'Confirm order';
+
+
 order.appendChild(order_h3);
+order.appendChild(total);
+order.appendChild(btn_confirm);
+
+
 
 bookshop.appendChild(catalog);
+bookshop.appendChild(popup);
 bookshop.appendChild(order);
 main_content.appendChild(bookshop);
 
