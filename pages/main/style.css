@@ -37,6 +37,16 @@ body {
     margin: 0 auto;
 }
 
+h3 {
+    margin: 10px 0 0;
+    font-family: 'georgia bold', sans-serif;
+    text-transform: capitalize;
+    font-size: 50px;
+    line-height: 60px;
+    color: #74381f;
+    letter-spacing: 0.06em;
+}
+
 body.overlay {
     overflow: hidden;
 }
@@ -56,7 +66,7 @@ body.overlay::after {
 
 .btn {
     display: inline-block;
-    padding: 15px 20px;
+    padding: 10px 10px;
     background-color: #fe7d4e;
     border-radius: 100px;
     text-align: center;
@@ -64,7 +74,8 @@ body.overlay::after {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     cursor: pointer;
-    color: #f3d0b8;
+    color: #fff8f4;
+    font-size: 10px;
     font-family: 'georgia bold', sans-serif;
 }
 
@@ -93,7 +104,7 @@ body.overlay::after {
     gap: 50px;
     padding: 40px;
     justify-content: center;
-    background-color: #fcfafa;
+    background-color: #fff7f3;
 }
 
 .banner-section img {
@@ -129,4 +140,85 @@ body.overlay::after {
 
 .btn-explore-more {
     padding: 15px 45px;
+    font-size: 15px;
 }
+
+
+/*******************CATALOG AND ORDER**********************/
+
+#catalog-order {
+    display: flex;
+    gap: 30px;
+    padding: 25px;
+}
+
+#book-catalog {
+    background-color: #fefdf9;
+    flex: 1;
+}
+
+#book-catalog h3 {
+    font-size: 25px;
+    text-align: center;
+    margin: 10px;
+}
+
+.book-card {
+    display: flex;
+    gap: 20px;
+    padding: 25px;
+}
+
+.img-book {
+    width: 150px;
+}
+
+.book-info {
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.book-info h4 {
+    font-family: 'georgia bold', sans-serif;
+    font-size: 20px;
+    margin: 0;
+    color: #734e50;
+}
+
+.book-info p {
+    font-family: 'georgia italic', sans-serif;
+    margin:0;
+    font-size: 15px;
+    color: #978d8c;
+}
+
+.book-info h5 {
+    margin:0;
+    font-size: 20px;
+    color: #763f28;
+    font-family: 'georgia bold', sans-serif;
+}
+
+.btn-catalog {
+    display: flex;
+    gap: 30px;
+}
+
+.btn-catalog .btn-show-more {
+    background-color:#48a696;
+}
+
+#order {
+    background-color: #f1fdfb;
+    flex: 1;
+}
+
+#order h3 {
+    font-size: 25px;
+    text-align: center;
+    margin: 10px;
+}
+
