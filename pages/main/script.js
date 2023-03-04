@@ -1,6 +1,6 @@
 let booksArr = [{
     "author": "Douglas Crockford",
-    "imageLink": "https://s1.livelib.ru/boocover/1000704615/200x305/546c/boocover.jpg",
+    "imageLink": "https://m.media-amazon.com/images/I/81kqrwS1nNL.jpg",
     "title": "JavaScript: The Good Parts: The Good Parts",
     "price": 30,
     "description": "With JavaScript: The Good Parts, you'll discover a beautiful, elegant, lightweight and highly expressive language that lets you create effective code, whether you're managing object libraries or just trying to get Ajax to run fast. If you develop sites or applications for the Web, this book is an absolute must"
