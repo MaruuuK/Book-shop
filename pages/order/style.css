@@ -1,0 +1,115 @@
+/**********************FONTS*********************/
+
+@font-face {
+    font-family: 'georgia normal';
+    src: url('../../assets/fonts/georgia.ttf');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'georgia bold';
+    src: url('../../assets/fonts/georgiab.ttf');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'georgia italic';
+    src: url('../../assets/fonts/georgiai.ttf');
+    font-style: italic;
+}
+
+/*******************GENERAL**********************/
+
+* {
+    box-sizing: border-box;
+    font-weight: 400;
+    font-family: 'georgia normal', sans-serif;
+    font-size: 15px;
+
+}
+
+body {
+    background-color: #fff7f3;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h3 {
+    margin: 10px 0 0;
+    font-family: 'georgia bold', sans-serif;
+    text-transform: capitalize;
+    font-size: 35px;
+    line-height: 60px;
+    color: #74381f;
+    letter-spacing: 0.06em;
+}
+
+body.overlay {
+    overflow: hidden;
+}
+
+/*******************BTN**********************/
+
+.btn {
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: #fe7d4e;
+    border-radius: 100px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    color: #fff8f4;
+    font-size: 10px;
+    font-family: 'georgia bold', sans-serif;
+}
+
+.btn:hover {
+    background-color: #f89976;
+}
+
+/*******************HEADER**********************/
+
+.main-content h1 {
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+.main-content h1 .word-1 {
+    font-size: 1.5em;
+    color: #fb8e63;
+}
+
+.main-content h1 .word-2 {
+    font-size: 1.5em;
+    color: #74381f;
+}
+
+/*************************ORDER FORM**********************/
+
+#order-form {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: auto;
+    background-color: #fefdf9;
+    padding: 15px;
+}
+
+#order-form h3 {
+    text-align: center;
+    margin: 0;
+    padding: 0 20px 20px;
+}
+
+label {
+
+    font-family: 'georgia bold', sans-serif;
+    font-size: 20px;
+    margin: 0;
+    color: #734e50;
+}
