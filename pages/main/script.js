@@ -1,6 +1,6 @@
 let booksArr = [{
     "author": "Douglas Crockford",
-    "imageLink": "https://m.media-amazon.com/images/I/81kqrwS1nNL.jpg",
+    "imageLink": "https://s1.livelib.ru/boocover/1000315672/200x305/4e4b/boocover.jpg",
     "title": "JavaScript: The Good Parts: The Good Parts",
     "price": 30,
     "description": "With JavaScript: The Good Parts, you'll discover a beautiful, elegant, lightweight and highly expressive language that lets you create effective code, whether you're managing object libraries or just trying to get Ajax to run fast. If you develop sites or applications for the Web, this book is an absolute must"
@@ -28,7 +28,7 @@ let booksArr = [{
 },
 {
     "author": "Addy Osmani",
-    "imageLink": "https://m.media-amazon.com/images/I/91WlvEND3rL.jpg",
+    "imageLink": "https://rukminim1.flixcart.com/image/416/416/jzn0tjk0/book/7/0/7/learning-javascript-design-patterns-original-imafjhf397f8ynby.jpeg?q=70",
     "title": "Learning JavaScript Design Patterns",
     "price": 32,
     "description": "With Learning JavaScript Design Patterns, you’ll learn how to write beautiful, structured, and maintainable JavaScript by applying classical and modern design patterns to the language. If you want to keep your code efficient, more manageable, and up-to-date with the latest best practices, this book is for you."
@@ -63,7 +63,7 @@ let booksArr = [{
 },
 {
     "author": "John Resig and Bear Bibeault",
-    "imageLink": "https://images.manning.com/book/a/b85f344-edd7-4833-adf3-d98878088441/resig.png",
+    "imageLink": "https://m.media-amazon.com/images/I/71OcrNWJv3L._AC_UF1000,1000_QL80_.jpg",
     "title": "Secrets of the JavaScript Ninja",
     "price": 33,
     "description": "Secrets of the Javascript Ninja takes you on a journey towards mastering modern JavaScript development in three phases: design, construction, and maintenance. Written for JavaScript developers with intermediate-level skills, this book will give you the knowledge you need to create a cross-browser JavaScript library from the ground up."
@@ -78,10 +78,13 @@ main_content.classList.add('main-content');
 
 document.body.prepend(main_content)
 
-//CREATE A HEADER
+//HEADER
 
 const header = document.createElement('header');
 const h1 = document.createElement('h1');
+const a = document.createElement('a');
+a.setAttribute('href', '../../pages/main/index.html');
+
 const h1_span1 = document.createElement('span');
 const h1_span2 = document.createElement('span');
 
@@ -91,13 +94,14 @@ h1_span2.textContent = 'Shop';
 h1_span1.classList.add('word-1');
 h1_span2.classList.add('word-2');
 
-h1.appendChild(h1_span1);
-h1.appendChild(h1_span2);
+a.appendChild(h1_span1);
+a.appendChild(h1_span2);
 
+h1.appendChild(a);
 header.appendChild(h1);
 main_content.appendChild(header);
 
-// CREATE THE BANNER
+//BANNER
 
 const banner = document.createElement('section');
 banner.classList.add('banner-section');
@@ -131,7 +135,7 @@ banner.appendChild(banner_img);
 
 main_content.appendChild(banner);
 
-// CREATE CATALOG AND BAG
+// CATALOG AND BAG
 
 const bookshop = document.createElement('section');
 bookshop.setAttribute('id', 'catalog-order');
@@ -146,17 +150,21 @@ catalog.appendChild(catalog_h3);
 
 // ADD BOOK CARD
 
-
 for (let i = 0; i < booksArr.length; i++) {
     let data = booksArr[i];
 
     let book_card = document.createElement('div');
     book_card.classList.add('book-card');
-    book_card.setAttribute('data-id', i);
 
-    const img = document.createElement('img');
-    img.setAttribute('src', data.imageLink);
-    img.classList.add('img-book');
+    const cover = document.createElement('img');
+    cover.setAttribute('src', data.imageLink);
+    cover.classList.add('img-book');
+    cover.setAttribute('draggable', 'true');
+    cover.setAttribute('data-id', i);
+
+    cover.addEventListener('dragstart', dragstart);
+    cover.addEventListener('dragend', dragend);
+
 
     const book_info = document.createElement('div');
     book_info.classList.add('book-info');
@@ -187,14 +195,12 @@ for (let i = 0; i < booksArr.length; i++) {
     btn_catalog.appendChild(btn_showMore);
     btn_catalog.appendChild(btn_addToBag);
 
-
     book_info.appendChild(title);
     book_info.appendChild(author);
     book_info.appendChild(price);
     book_info.appendChild(btn_catalog);
 
-
-    book_card.appendChild(img);
+    book_card.appendChild(cover);
     book_card.appendChild(book_info);
     catalog.appendChild(book_card);
 
@@ -202,6 +208,143 @@ for (let i = 0; i < booksArr.length; i++) {
 
     btn_addToBag.addEventListener('click', addToBag);
 }
+
+// ADD TO CART
+let bag = [];
+
+function addToBag(e) {
+    let idCard = e.currentTarget.dataset.id;
+    bag.push({ ...booksArr[idCard] });
+    displayCart()
+}
+
+function displayCart() {
+    if (bag.length === 0) {
+        cartItems.innerHTML = "Your bag is empty";
+        cartItems.classList.add('cart-text');
+        sum.innerHTML = '$ ' + 0 + ".00";
+        btn_confirm.removeAttribute('href');
+        btn_confirm.classList.add('disabled');
+    } else {
+        let totalSum = 0;
+        cartItems.classList.remove('cart-text');
+        btn_confirm.setAttribute('href', '../../pages/order/index.html');
+        btn_confirm.classList.remove('disabled');
+        cartItems.innerHTML = "";
+        for (let i = 0; i < bag.length; i++) {
+            totalSum = totalSum + bag[i].price;
+            sum.innerHTML = '$ ' + totalSum + '.00';
+
+            const bagItem = document.createElement('div');
+            bagItem.classList.add("book-card");
+
+            const imageBag = document.createElement('img');
+            imageBag.setAttribute('src', bag[i].imageLink);
+            imageBag.classList.add('img-book');
+
+            const btn_delete_item = document.createElement('span');
+            btn_delete_item.classList.add('btn-del');
+            btn_delete_item.setAttribute('data-id', i);
+
+            btn_delete_item.addEventListener('click', delElement);
+
+            const book_info_bag = document.createElement('div');
+            book_info_bag.classList.add('book-info');
+
+            const titleBag = document.createElement('h4');
+            titleBag.textContent = bag[i].title;
+
+            const authorBag = document.createElement('p');
+            authorBag.textContent = `by ${bag[i].author}`;
+
+            const priceBag = document.createElement('h5');
+            priceBag.textContent = `$${bag[i].price}`;
+
+            book_info_bag.appendChild(titleBag);
+            book_info_bag.appendChild(authorBag);
+            book_info_bag.appendChild(priceBag);
+
+            bagItem.appendChild(btn_delete_item);
+            bagItem.appendChild(imageBag);
+            bagItem.appendChild(book_info_bag);
+
+            cartItems.appendChild(bagItem);
+        }
+    }
+}
+
+function delElement(e) {
+    let idCard = e.currentTarget.dataset.id;
+    bag.splice(idCard, 1);
+    displayCart();
+}
+
+//ORDER BOOKS
+
+const order = document.createElement('div');
+order.setAttribute('id', 'order');
+
+const drop_text = document.createElement('span');
+drop_text.setAttribute('id', 'drop-text');
+drop_text.textContent = 'Drop here';
+
+const order_h3 = document.createElement('h3');
+order_h3.textContent = 'Order books';
+
+const cartItems = document.createElement('div');
+cartItems.innerHTML = "Your bag is empty";
+cartItems.classList.add('cart-text');
+
+const total_price = document.createElement('div');
+total_price.classList.add('total-price');
+
+const total = document.createElement('span');
+total.classList.add('total-text');
+total.innerHTML = `Total`;
+
+const sum = document.createElement('span');
+sum.classList.add('total-sum');
+
+total_price.appendChild(total);
+total_price.appendChild(sum);
+sum.innerHTML = '$ ' + 0 + ".00";
+
+const btn_confirm = document.createElement('a');
+btn_confirm.classList.add('btn-confirm-order');
+btn_confirm.classList.add('btn');
+
+btn_confirm.textContent = 'Confirm order';
+btn_confirm.classList.add('disabled');
+
+order.appendChild(order_h3);
+order.appendChild(cartItems);
+order.appendChild(total_price);
+order.appendChild(btn_confirm);
+order.appendChild(drop_text);
+
+//DRAG AND DROP
+order.addEventListener('dragover', (e) => {
+    e.preventDefault();
+})
+
+function dragstart(e) {
+    let idCard = e.currentTarget.dataset.id;
+    e.dataTransfer.setData('id', idCard);
+    order.classList.add('drop-field');
+    drop_text.style.display = 'block';
+}
+
+function dragend() {
+    order.classList.remove('drop-field');
+    drop_text.style.display = 'none';
+}
+
+order.addEventListener('drop', function (e) {
+    bag.push({ ...booksArr[e.dataTransfer.getData('id')] });
+    setTimeout(displayCart(), 0);
+    order.classList.remove('drop-field');
+    drop_text.style.display = 'none';
+});
 
 //POPUP
 
@@ -270,126 +413,11 @@ window.addEventListener('keyup', function (e) {
     }
 });
 
-// ADD TO CART
-let bag = [];
-
-function addToBag(e) {
-    let idCard = e.currentTarget.dataset.id;
-    bag.push({ ...booksArr[idCard] });
-    displayCart()
-}
-
-
-
-function displayCart() {
-    if (bag.length === 0) {
-        cartItems.innerHTML = "Your bag is empty";
-        cartItems.classList.add('cart-text');
-        sum.innerHTML = '$ ' + 0 + ".00";
-        btn_confirm.removeAttribute('href');
-        btn_confirm.classList.add('disabled');
-    } else {
-        let totalSum = 0;
-        cartItems.classList.remove('cart-text');
-        btn_confirm.setAttribute('href', '../../pages/order/index.html');
-        btn_confirm.classList.remove('disabled');
-        cartItems.innerHTML = "";
-        for (let i = 0; i < bag.length; i++) {
-            totalSum = totalSum + bag[i].price;
-            sum.innerHTML = '$ ' + totalSum + '.00';
-
-            const bagItem = document.createElement('div');
-            bagItem.classList.add("book-card");
-
-            const imageBag = document.createElement('img');
-            imageBag.setAttribute('src', bag[i].imageLink);
-            imageBag.classList.add('img-book');
-
-            const btn_delete_item = document.createElement('span');
-            btn_delete_item.classList.add('btn-del');
-            btn_delete_item.setAttribute('data-id', i);
-
-            btn_delete_item.addEventListener('click', delElement);
-
-            const book_info_bag = document.createElement('div');
-            book_info_bag.classList.add('book-info');
-
-            const titleBag = document.createElement('h4');
-            titleBag.textContent = bag[i].title;
-
-            const authorBag = document.createElement('p');
-            authorBag.textContent = `by ${bag[i].author}`;
-
-            const priceBag = document.createElement('h5');
-            priceBag.textContent = `$${bag[i].price}`;
-
-            book_info_bag.appendChild(titleBag);
-            book_info_bag.appendChild(authorBag);
-            book_info_bag.appendChild(priceBag);
-
-            bagItem.appendChild(btn_delete_item);
-            bagItem.appendChild(imageBag);
-            bagItem.appendChild(book_info_bag);
-
-            cartItems.appendChild(bagItem);
-        }
-    }
-}
-
-function delElement(e) {
-    let idCard = e.currentTarget.dataset.id;
-    bag.splice(idCard, 1);
-    displayCart();
-}
-
-//ORDER BOOKS
-
-const order = document.createElement('div');
-order.setAttribute('id', 'order');
-
-const order_h3 = document.createElement('h3');
-order_h3.textContent = 'Order books';
-
-const cartItems = document.createElement('div');
-cartItems.innerHTML = "Your bag is empty";
-cartItems.classList.add('cart-text');
-
-const total_price = document.createElement('div');
-total_price.classList.add('total-price');
-
-const total = document.createElement('span');
-total.classList.add('total-text');
-total.innerHTML = `Total`;
-
-const sum = document.createElement('span');
-sum.classList.add('total-sum');
-
-total_price.appendChild(total);
-total_price.appendChild(sum);
-sum.innerHTML = '$ ' + 0 + ".00";
-
-const btn_confirm = document.createElement('a');
-btn_confirm.classList.add('btn-confirm-order');
-btn_confirm.classList.add('btn');
-
-btn_confirm.textContent = 'Confirm order';
-btn_confirm.classList.add('disabled');
-
-order.appendChild(order_h3);
-order.appendChild(cartItems);
-order.appendChild(total_price);
-order.appendChild(btn_confirm);
-
 
 bookshop.appendChild(catalog);
 bookshop.appendChild(popup);
 bookshop.appendChild(order);
 main_content.appendChild(bookshop);
-
-
-
-
-
 
 
 

@@ -89,14 +89,20 @@ body.overlay::after {
     margin: 0;
     padding: 20px;
     text-align: center;
+    font-size: 2em;
 }
 
-.main-content h1 .word-1 {
+.main-content h1 a {
+    text-decoration: none;
+    font-size: 1.0em;
+}
+
+.main-content h1 a .word-1 {
     font-size: 1.5em;
     color: #fb8e63;
 }
 
-.main-content h1 .word-2 {
+.main-content h1 a .word-2 {
     font-size: 1.5em;
     color: #74381f;
 }
@@ -159,6 +165,7 @@ body.overlay::after {
 #book-catalog {
     background-color: #fefdf9;
     flex: 1;
+    box-shadow: 5px 5px 10px #888;
 }
 
 #book-catalog h3 {
@@ -175,6 +182,8 @@ body.overlay::after {
 
 .img-book {
     width: 150px;
+    cursor: grab;
+    border: 1px solid #000;
 }
 
 .book-info {
@@ -223,8 +232,24 @@ body.overlay::after {
     background-color: #f1fdfb;
     flex: 1;
     display: flex;
-    flex-direction: column;
-    /* gap: 30px; */
+    flex-direction: column;box-shadow: 5px 5px 10px #888;
+}
+
+.drop-field {
+    border: 2px dashed gray;
+    padding: 20px;
+    text-align: center;
+    opacity: 0.5;
+}
+
+#drop-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: gray;
+    text-transform: uppercase;
+    text-align: center;
+    display: none;
+    opacity: 1;
 }
 
 #order h3 {
@@ -292,6 +317,7 @@ body.overlay::after {
 
 #order .book-card .img-book {
     grid-area: img;
+    cursor: none;
 }
 
 #order .book-card .btn-del {
