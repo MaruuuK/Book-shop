@@ -37,55 +37,26 @@ body {
     margin: 0 auto;
 }
 
-h3 {
-    margin: 10px 0 0;
-    font-family: 'georgia bold', sans-serif;
-    text-transform: capitalize;
-    font-size: 35px;
-    line-height: 60px;
-    color: #74381f;
-    letter-spacing: 0.06em;
-}
-
-body.overlay {
-    overflow: hidden;
-}
-
-/*******************BTN**********************/
-
-.btn {
-    display: inline-block;
-    padding: 10px 10px;
-    background-color: #fe7d4e;
-    border-radius: 100px;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    cursor: pointer;
-    color: #fff8f4;
-    font-size: 10px;
-    font-family: 'georgia bold', sans-serif;
-}
-
-.btn:hover {
-    background-color: #f89976;
-}
-
 /*******************HEADER**********************/
 
 .main-content h1 {
     margin: 0;
     padding: 20px;
     text-align: center;
+    font-size: 2em;
 }
 
-.main-content h1 .word-1 {
+.main-content h1 a {
+    text-decoration: none;
+    font-size: 1.0em;
+}
+
+.main-content h1 a .word-1 {
     font-size: 1.5em;
     color: #fb8e63;
 }
 
-.main-content h1 .word-2 {
+.main-content h1 a .word-2 {
     font-size: 1.5em;
     color: #74381f;
 }
@@ -97,19 +68,111 @@ body.overlay {
     gap: 15px;
     grid-template-columns: auto;
     background-color: #fefdf9;
-    padding: 15px;
+    margin: 15px 100px;
+    padding: 0 200px 25px;
+    box-shadow: 5px 5px 10px #888;
 }
 
 #order-form h3 {
     text-align: center;
     margin: 0;
-    padding: 0 20px 20px;
+    padding: 0 20px;
+    font-family: 'georgia bold', sans-serif;
+    text-transform: capitalize;
+    font-size: 30px;
+    line-height: 60px;
+    color: #74381f;
+    letter-spacing: 0.06em;
 }
 
 label {
-
+    display: block;
     font-family: 'georgia bold', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     margin: 0;
+    color: #763f28;
+    padding-bottom: 10px;
+    text-transform: capitalize;
+}
+
+input {
+    display: block;
+    border-radius: 3px;
+    border: 1px solid #000;
+    background-color: #fafafa;
+    font-size: 15px;
+    padding: 5px;
     color: #734e50;
+}
+
+input:active {
+    border: 2px solid #74381f;
+}
+
+.field {
+    width: 100%;
+}
+
+.payment-method span {
+    display: block;
+    font-family: 'georgia bold', sans-serif;
+    font-size: 18px;
+    color: #763f28;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+.payment label {
+    display: inline-block;
+    font-family: 'georgia normal', sans-serif;
+    margin-left: 10px;
+    color: #f76c35;
+}
+
+.payment input {
+    display: inline-block;
+}
+
+.gift-section span {
+    display: block;
+    font-family: 'georgia bold', sans-serif;
+    font-size: 18px;
+    color: #763f28;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+.gift-item label {
+    font-family: 'georgia normal', sans-serif;
+    display: inline-block;
+    margin-left: 10px;
+    color: #63311d;
+    text-transform: unset;
+}
+
+.gift-item input {
+    display: inline-block;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #fe7d4e;
+    border-radius: 100px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    color: #fff8f4;
+    font-family: 'georgia bold', sans-serif;
+    padding: 10px 15px;
+    font-size: 12px;
+    width: 25%;
+    border: none;
+    justify-self: center;
+    margin-top: 25px;
+}
+
+.btn:hover {
+    background-color: #f89976;
 }

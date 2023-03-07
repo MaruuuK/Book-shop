@@ -8,6 +8,9 @@ document.body.prepend(main_content)
 
 const header = document.createElement('header');
 const h1 = document.createElement('h1');
+const a = document.createElement('a');
+a.setAttribute('href', '../../pages/main/index.html');
+
 const h1_span1 = document.createElement('span');
 const h1_span2 = document.createElement('span');
 
@@ -17,9 +20,10 @@ h1_span2.textContent = 'Shop';
 h1_span1.classList.add('word-1');
 h1_span2.classList.add('word-2');
 
-h1.appendChild(h1_span1);
-h1.appendChild(h1_span2);
+a.appendChild(h1_span1);
+a.appendChild(h1_span2);
 
+h1.appendChild(a);
 header.appendChild(h1);
 main_content.appendChild(header);
 
@@ -45,6 +49,7 @@ input_name.setAttribute('type', 'text');
 input_name.setAttribute('name', 'name');
 input_name.setAttribute('id', 'name');
 input_name.setAttribute('required', '');
+input_name.classList.add('field');
 
 //SURNAME
 const surname = document.createElement('div');
@@ -59,6 +64,7 @@ input_surname.setAttribute('type', 'text');
 input_surname.setAttribute('id', 'surname');
 input_surname.setAttribute('name', 'surname');
 input_surname.setAttribute('required', '');
+input_surname.classList.add('field');
 
 //DELIVERY DAY
 const delivery_day = document.createElement('div');
@@ -74,6 +80,7 @@ input_date.setAttribute('id', 'date-input');
 input_date.setAttribute('name', 'date');
 input_date.setAttribute('required', '');
 
+
 //STREET
 const street = document.createElement('div');
 street.classList.add('street');
@@ -87,6 +94,7 @@ input_street.setAttribute('type', 'text');
 input_street.setAttribute('name', 'street');
 input_street.setAttribute('id', 'street');
 input_street.setAttribute('required', '');
+input_street.classList.add('field');
 
 //HOUSE
 const house = document.createElement('div');
@@ -101,6 +109,7 @@ input_house.setAttribute('type', 'text');
 input_house.setAttribute('name', 'house');
 input_house.setAttribute('id', 'house');
 input_house.setAttribute('required', '');
+input_house.classList.add('field');
 
 //FLAT
 const flat = document.createElement('div');
@@ -115,16 +124,20 @@ input_flat.setAttribute('type', 'text');
 input_flat.setAttribute('name', 'flat');
 input_flat.setAttribute('id', 'flat');
 input_flat.setAttribute('required', '');
+input_flat.classList.add('field');
 
 //Payment method
 const payment_method = document.createElement('div');
-payment_method.classList.add('payment');
+payment_method.classList.add('payment-method');
 
 const payment_head= document.createElement('span');
 payment_head.textContent = 'Payment method ';
 
+const cash_div = document.createElement('div');
+cash_div.classList.add('payment');
+
 const label_cash = document.createElement('label');
-label_cash.textContent = 'Cash ';
+label_cash.textContent = 'Cash';
 label_cash.setAttribute('for', 'cash');
 
 const input_cash = document.createElement('input');
@@ -134,8 +147,11 @@ input_cash.setAttribute('name', 'cashOrcardGroup');
 input_cash.setAttribute('value', 'cash');
 input_cash.setAttribute('required', '');
 
+const card_div = document.createElement('div');
+card_div.classList.add('payment');
+
 const label_card = document.createElement('label');
-label_card.textContent = 'Card ';
+label_card.textContent = 'Card';
 label_card.setAttribute('for', 'card');
 
 const input_card = document.createElement('input');
@@ -151,6 +167,9 @@ gift.classList.add('gift-section');
 const gift_head = document.createElement('span');
 gift_head.textContent = 'Choose 2 gifts ';
 
+const gift1 = document.createElement('div');
+gift1.classList.add('gift-item');
+
 const input_packing = document.createElement('input');
 input_packing.setAttribute('type', 'checkbox');
 input_packing.setAttribute('id', 'packing');
@@ -160,6 +179,9 @@ input_packing.setAttribute('value', 'pack as a gift');
 const label_packing = document.createElement('label');
 label_packing.setAttribute('for', 'packing');
 label_packing.textContent = 'Pack as a gift';
+
+const gift2 = document.createElement('div');
+gift2.classList.add('gift-item');
 
 const input_postcard = document.createElement('input');
 input_postcard.setAttribute('type', 'checkbox');
@@ -171,6 +193,9 @@ const label_postcard = document.createElement('label');
 label_postcard.setAttribute('for', 'postcard');
 label_postcard.textContent = 'Add postcard';
 
+const gift3 = document.createElement('div');
+gift3.classList.add('gift-item');
+
 const input_discount = document.createElement('input');
 input_discount.setAttribute('type', 'checkbox');
 input_discount.setAttribute('id', 'discount');
@@ -181,6 +206,9 @@ const label_discount = document.createElement('label');
 label_discount.setAttribute('for', 'discount');
 label_discount.textContent = 'Provide 2% discount to the next time';
 
+const gift4 = document.createElement('div');
+gift4.classList.add('gift-item');
+
 const input_pen = document.createElement('input');
 input_pen.setAttribute('type', 'checkbox');
 input_pen.setAttribute('id', 'pen');
@@ -190,6 +218,13 @@ input_pen.setAttribute('value', 'branded pen or pencil');
 const label_pen = document.createElement('label');
 label_pen.setAttribute('for', 'discount');
 label_pen.textContent = 'Branded pen or pencil';
+
+//COMPLETE BTN
+
+const complete_btn = document.createElement('button');
+complete_btn.setAttribute('type', 'submit');
+complete_btn.textContent = 'Complete';
+complete_btn.classList.add('btn');
 
 //APPEND ELEMENTS
 form.appendChild(header_form);
@@ -221,23 +256,36 @@ form.appendChild(flat);
 
 
 payment_method.appendChild(payment_head);
-payment_method.appendChild(input_cash);
-payment_method.appendChild(label_cash);
-payment_method.appendChild(input_card);
-payment_method.appendChild(label_card);
+cash_div.appendChild(input_cash);
+cash_div.appendChild(label_cash);
+payment_method.appendChild(cash_div);
+
+card_div.appendChild(input_card);
+card_div.appendChild(label_card);
+payment_method.appendChild(card_div);
+
 
 form.appendChild(payment_method);
 
 gift.appendChild(gift_head);
-gift.appendChild(input_packing);
-gift.appendChild(label_packing);
-gift.appendChild(input_postcard);
-gift.appendChild(label_postcard);
-gift.appendChild(input_discount);
-gift.appendChild(label_discount);
-gift.appendChild(input_pen);
-gift.appendChild(label_pen);
+gift1.appendChild(input_packing);
+gift1.appendChild(label_packing);
+
+gift2.appendChild(input_postcard);
+gift2.appendChild(label_postcard);
+gift3.appendChild(input_discount);
+gift3.appendChild(label_discount);
+gift4.appendChild(input_pen);
+gift4.appendChild(label_pen);
+
+gift.appendChild(gift1);
+gift.appendChild(gift2);
+gift.appendChild(gift3);
+gift.appendChild(gift4);
+
 
 form.appendChild(gift);
+
+form.appendChild(complete_btn);
 
 main_content.appendChild(form);
