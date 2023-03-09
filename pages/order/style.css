@@ -32,31 +32,31 @@ body {
     background-color: #fff7f3;
 }
 
-.main-content {
+main {
     max-width: 1200px;
     margin: 0 auto;
 }
 
 /*******************HEADER**********************/
 
-.main-content h1 {
+h1 {
     margin: 0;
     padding: 20px;
     text-align: center;
     font-size: 2em;
 }
 
-.main-content h1 a {
+h1 a {
     text-decoration: none;
     font-size: 1.0em;
 }
 
-.main-content h1 a .word-1 {
+h1 a .word-1 {
     font-size: 1.5em;
     color: #fb8e63;
 }
 
-.main-content h1 a .word-2 {
+h1 a .word-2 {
     font-size: 1.5em;
     color: #74381f;
 }
@@ -113,7 +113,7 @@ input:active {
     width: 100%;
 }
 
-.payment-method span {
+.list-header {
     display: block;
     font-family: 'georgia bold', sans-serif;
     font-size: 18px;
@@ -122,14 +122,14 @@ input:active {
     text-transform: capitalize;
 }
 
-.payment label {
+.radio-item label {
     display: inline-block;
     font-family: 'georgia normal', sans-serif;
     margin-left: 10px;
     color: #f76c35;
 }
 
-.payment input {
+.radio-item input {
     display: inline-block;
 }
 
@@ -142,7 +142,7 @@ input:active {
     text-transform: capitalize;
 }
 
-.gift-item label {
+.checkbox-item label {
     font-family: 'georgia normal', sans-serif;
     display: inline-block;
     margin-left: 10px;
@@ -150,7 +150,7 @@ input:active {
     text-transform: unset;
 }
 
-.gift-item input {
+.checkbox-item input {
     display: inline-block;
 }
 
