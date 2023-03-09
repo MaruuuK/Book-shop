@@ -37,80 +37,20 @@ document.body.prepend(main_content);
 
 
 //ORDER FORM
-
 const form = document.createElement('form');
 form.setAttribute('id', 'order-form');
 
 form.appendChild(
     createElement('h3', 'Order form'));
 
-//Gift
-const gift = document.createElement('div');
-gift.classList.add('gift-section');
-
-const gift_head = document.createElement('span');
-gift_head.textContent = 'Choose 2 gifts ';
-
-const gift1 = document.createElement('div');
-gift1.classList.add('gift-item');
-
-const input_packing = document.createElement('input');
-input_packing.setAttribute('type', 'checkbox');
-input_packing.setAttribute('id', 'packing');
-input_packing.setAttribute('name', 'gift');
-input_packing.setAttribute('value', 'pack as a gift');
-
-const label_packing = document.createElement('label');
-label_packing.setAttribute('for', 'packing');
-label_packing.textContent = 'Pack as a gift';
-
-const gift2 = document.createElement('div');
-gift2.classList.add('gift-item');
-
-const input_postcard = document.createElement('input');
-input_postcard.setAttribute('type', 'checkbox');
-input_postcard.setAttribute('id', 'postcard');
-input_postcard.setAttribute('name', 'gift');
-input_postcard.setAttribute('value', 'add postcard');
-
-const label_postcard = document.createElement('label');
-label_postcard.setAttribute('for', 'postcard');
-label_postcard.textContent = 'Add postcard';
-
-const gift3 = document.createElement('div');
-gift3.classList.add('gift-item');
-
-const input_discount = document.createElement('input');
-input_discount.setAttribute('type', 'checkbox');
-input_discount.setAttribute('id', 'discount');
-input_discount.setAttribute('name', 'gift');
-input_discount.setAttribute('value', 'provide 2% discount to the next time');
-
-const label_discount = document.createElement('label');
-label_discount.setAttribute('for', 'discount');
-label_discount.textContent = 'Provide 2% discount to the next time';
-
-const gift4 = document.createElement('div');
-gift4.classList.add('gift-item');
-
-const input_pen = document.createElement('input');
-input_pen.setAttribute('type', 'checkbox');
-input_pen.setAttribute('id', 'pen');
-input_pen.setAttribute('name', 'gift');
-input_pen.setAttribute('value', 'branded pen or pencil');
-
-const label_pen = document.createElement('label');
-label_pen.setAttribute('for', 'discount');
-label_pen.textContent = 'Branded pen or pencil';
-
 //COMPLETE BTN
-
 const complete_btn = document.createElement('button');
 complete_btn.setAttribute('type', 'submit');
 complete_btn.textContent = 'Complete';
 complete_btn.classList.add('btn');
 
 //APPEND ELEMENTS
+
 form.appendChild(
     createField('name',
         createLabel('name', 'name'),
