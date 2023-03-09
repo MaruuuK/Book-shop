@@ -32,7 +32,7 @@ body {
     background-color: #fff7f3;
 }
 
-.main-content {
+main {
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -85,31 +85,31 @@ body.overlay::after {
 
 /*******************HEADER**********************/
 
-.main-content h1 {
+h1 {
     margin: 0;
     padding: 20px;
     text-align: center;
     font-size: 2em;
 }
 
-.main-content h1 a {
+h1 a {
     text-decoration: none;
     font-size: 1.0em;
 }
 
-.main-content h1 a .word-1 {
+h1 a .word-1 {
     font-size: 1.5em;
     color: #fb8e63;
 }
 
-.main-content h1 a .word-2 {
+h1 a .word-2 {
     font-size: 1.5em;
     color: #74381f;
 }
 
 /*******************BANNER**********************/
 
-.main-content .banner-section {
+#banner-section {
     display: flex;
     gap: 50px;
     padding: 40px;
@@ -117,12 +117,12 @@ body.overlay::after {
     background-color: #fff7f3;
 }
 
-.banner-section img {
+#banner-section img {
     max-width: 400px;
     max-height: 400px;
 }
 
-.banner-section .banner-info {
+#banner-section .banner-info {
     display: flex;
     flex-direction: column;
     gap: 35px;
@@ -208,7 +208,7 @@ body.overlay::after {
     color: #978d8c;
 }
 
-.book-info h5 {
+.book-info .price{
     margin: 0;
     font-size: 20px;
     color: #763f28;
@@ -236,16 +236,14 @@ body.overlay::after {
 }
 
 .drop-field {
-    border: 2px dashed gray;
-    padding: 20px;
-    text-align: center;
+    border: 2px dashed rgb(197, 197, 197);
     opacity: 0.5;
 }
 
-#drop-text {
+.drop-text {
     font-size: 24px;
     font-weight: bold;
-    color: gray;
+    color: #000;
     text-transform: uppercase;
     text-align: center;
     display: none;
@@ -256,12 +254,13 @@ body.overlay::after {
     font-size: 30px;
     text-align: center;
     margin: 10px;
+    color: #394d49;
 }
 
 #order .cart-text {
     font-size: 25px;
     text-align: center;
-    color: #435d59;
+    color: #677573;
     font-family: 'georgia bold', sans-serif;
     margin: 30px 0;
 }
