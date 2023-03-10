@@ -360,6 +360,9 @@ appendChildren(popup, btn_close, book_description);
 
 btn_close.addEventListener('click', closeOverlay);
 
+appendChildren(bookshop, catalog, popup, order);
+
+main_content.appendChild(bookshop);
 
 //OVERLAY
 
@@ -381,10 +384,6 @@ window.addEventListener('keyup', function (e) {
         closeOverlay();
     }
 });
-
-appendChildren(bookshop, catalog, popup, order);
-
-main_content.appendChild(bookshop);
 
 
 

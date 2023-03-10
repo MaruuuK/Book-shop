@@ -37,6 +37,21 @@ main {
     margin: 0 auto;
 }
 
+body.overlay {
+    overflow: hidden;
+}
+
+body.overlay::after {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(41, 41, 41, 0.6);
+}
+
 /*******************HEADER**********************/
 
 h1 {
@@ -177,7 +192,8 @@ input:active {
     background-color: #f89976;
 }
 
-.btn[disabled], .btn[disabled]:hover {
+.btn[disabled],
+.btn[disabled]:hover {
     background-color: #fe7d4e;
     opacity: 0.5;
     cursor: default;
@@ -198,4 +214,47 @@ input:active {
 
 .field.invalid .error-message {
     display: block;
+}
+
+/*******************POPUP**********************/
+
+.popup-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 2;
+    background-color: #faf5f5;
+    width: 500px;
+}
+
+.popup-window.open {
+    display: block;
+}
+
+.popup-window h3 {
+    text-align: center;
+    margin: 0;
+    padding: 20px 20px;
+    font-family: 'georgia bold', sans-serif;
+    font-size: 20px;
+    color: #74381f;
+    letter-spacing: 0.06em;
+}
+
+.popup-window p {
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10px;
+    color: #6a5247;
+}
+
+.popup-window .back {
+    display: block;
+    width: 40%;
+    margin: 30px auto 10px;
+    padding: 10px 0;
+    font-size: 10px;
 }

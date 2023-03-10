@@ -16,7 +16,6 @@ function appendChildren(element, ...children) {
 }
 
 
-
 //CREATE THE MAIN BLOCK
 const main_content = document.createElement('main');
 
@@ -41,8 +40,7 @@ const form = document.createElement('form');
 form.setAttribute('id', 'order-form');
 
 form.appendChild(
-    createElement('h3', 'Order form')
-);
+    createElement('h3', 'Order form'));
 
 //APPEND ELEMENTS
 
@@ -60,7 +58,7 @@ form.appendChild(
                 if (/[\d\s]/.test(input.value)) {
                     return 'Name cannot contain numbers and spaces';
                 }
-            }
+            },
         }
     )
 );
@@ -170,8 +168,9 @@ form.appendChild(
                     return 'You must choose payment method';
                 }
             },
-        }))
-
+        }
+    )
+)
 
 form.appendChild(
     createField('gift',
@@ -190,46 +189,65 @@ form.appendChild(
                     return 'You can choose only 2 gifts';
                 }
             },
-        }))
-
+        }
+    )
+)
 
 //COMPLETE BTN
 const complete_btn = document.createElement('button');
 complete_btn.setAttribute('type', 'submit');
+complete_btn.setAttribute('disabled', 'disabled');
 complete_btn.textContent = 'Complete';
 complete_btn.classList.add('btn');
-
 form.appendChild(complete_btn);
 
 main_content.appendChild(form);
 
+//SUMMARIZED INFORMATION
+let sum_info = {};
 
-form.addEventListener('validate', () => {
-    if (form.querySelectorAll('.field.invalid, .field.not-checked').length) {
-        complete_btn.setAttribute('disabled', 'disabled');
-    } else {
-        complete_btn.removeAttribute('disabled');
-    }
-})
+complete_btn.addEventListener('click',
+    function () {
+        const popup_msg = document.createElement('div');
+        popup_msg.setAttribute('class', 'popup-window');
 
-//FUNCTION TO CREATE ELEMENTS
+        const btn_back = document.createElement('a');
+        btn_back.setAttribute('href', '../../pages/main/index.html');
+        btn_back.classList.add('btn');
+        btn_back.classList.add('back');
+        btn_back.textContent = 'back to catalog';
 
+        appendChildren(popup_msg,
+            createElement('h3', 'Order has been created successfully!'),
+            createElement('p', `The delivery address is ${sum_info.street} street house ${sum_info.house} flat ${sum_info.flat}.`),
+            createElement('p', `Customer ${sum_info.name} ${sum_info.surname}.`),
+            btn_back);
+
+        main_content.appendChild(popup_msg);
+
+        let body = document.querySelector('body');
+
+        body.classList.add('overlay');
+        popup_msg.classList.add('open');
+    });
+
+//FUNCTIONS TO CREATE ELEMENTS
 function createField(id, label, input, validator) {
     let field = document.createElement('div');
     field.setAttribute('id', 'field-' + id);
     field.classList.add('field');
 
-    const errorMessage = document.createElement('div');
-    errorMessage.classList.add('error-message');
-
     if (validator.requiredCheck) {
         field.classList.add('not-checked');
     }
 
+    const errorMessage = document.createElement('div');
+    errorMessage.classList.add('error-message');
+
     input.addEventListener(validator.event, function () {
         let error = validator.callback(input);
-
         if (error === undefined) {
+            sum_info[id] = input.value;
             field.classList.remove('invalid');
             errorMessage.innerHTML = '';
         } else {
@@ -239,7 +257,7 @@ function createField(id, label, input, validator) {
 
         field.classList.remove('not-checked');
         form.dispatchEvent(new Event('validate'));
-    })
+    });
 
     appendChildren(field, label, input, errorMessage);
     return field;
@@ -311,3 +329,14 @@ function createCheckboxList(name, items) {
     return checkbox;
 }
 
+form.addEventListener('validate', function() {
+    if (form.querySelectorAll('.field.invalid, .field.not-checked').length) {
+        complete_btn.setAttribute('disabled', 'disabled');
+    } else {
+        complete_btn.removeAttribute('disabled');
+    }
+})
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+})
