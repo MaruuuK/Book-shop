@@ -94,6 +94,8 @@ const main_content = document.createElement('main');
 
 document.body.prepend(main_content);
 
+const fragment = document.createDocumentFragment();
+
 //HEADER
 
 (function () {
@@ -104,7 +106,7 @@ document.body.prepend(main_content);
     a.appendChild(createElement('span', 'Shop', 'word-2'));
 
     header.appendChild(a);
-    main_content.appendChild(header);
+    fragment.appendChild(header);
 })();
 
 //BANNER
@@ -134,7 +136,7 @@ document.body.prepend(main_content);
 
     appendChildren(banner, banner_info, banner_img);
 
-    main_content.appendChild(banner);
+    fragment.appendChild(banner);
 })();
 
 // CATALOG AND BAG
@@ -362,7 +364,9 @@ btn_close.addEventListener('click', closeOverlay);
 
 appendChildren(bookshop, catalog, popup, order);
 
-main_content.appendChild(bookshop);
+fragment.appendChild(bookshop);
+
+main_content.appendChild(fragment);
 
 //OVERLAY
 

@@ -21,6 +21,8 @@ const main_content = document.createElement('main');
 
 document.body.prepend(main_content);
 
+const fragment = document.createDocumentFragment();
+
 //HEADER
 
 (function () {
@@ -31,7 +33,7 @@ document.body.prepend(main_content);
     a.appendChild(createElement('span', 'Shop', 'word-2'));
 
     header.appendChild(a);
-    main_content.appendChild(header);
+    fragment.appendChild(header);
 })();
 
 
@@ -201,9 +203,10 @@ complete_btn.textContent = 'Complete';
 complete_btn.classList.add('btn');
 form.appendChild(complete_btn);
 
-main_content.appendChild(form);
+fragment.appendChild(form);
 
 //SUMMARIZED INFORMATION
+
 let sum_info = {};
 
 complete_btn.addEventListener('click',
@@ -223,7 +226,7 @@ complete_btn.addEventListener('click',
             createElement('p', `Customer ${sum_info.name} ${sum_info.surname}.`),
             btn_back);
 
-        main_content.appendChild(popup_msg);
+        fragment.appendChild(popup_msg);
 
         let body = document.querySelector('body');
 
@@ -231,6 +234,7 @@ complete_btn.addEventListener('click',
         popup_msg.classList.add('open');
     });
 
+main_content.appendChild(fragment);
 //FUNCTIONS TO CREATE ELEMENTS
 function createField(id, label, input, validator) {
     let field = document.createElement('div');

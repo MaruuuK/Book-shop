@@ -254,7 +254,7 @@ input:active {
 .popup-window .back {
     display: block;
     width: 40%;
-    margin: 30px auto 10px;
+    margin: 15px auto 10px;
     padding: 10px 0;
     font-size: 10px;
 }
