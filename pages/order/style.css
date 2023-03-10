@@ -109,7 +109,7 @@ input:active {
     border: 2px solid #74381f;
 }
 
-.field {
+.field input[type=text] {
     width: 100%;
 }
 
@@ -175,4 +175,27 @@ input:active {
 
 .btn:hover {
     background-color: #f89976;
+}
+
+.btn[disabled], .btn[disabled]:hover {
+    background-color: #fe7d4e;
+    opacity: 0.5;
+    cursor: default;
+}
+
+/*************************MESSAGE ERROR*********************/
+
+.error-message {
+    margin-top: 10px;
+    color: rgba(250, 0, 0);
+    display: none;
+}
+
+.field.invalid input {
+    border-color: rgba(250, 0, 0);
+    background-color: #ffe3e3;
+}
+
+.field.invalid .error-message {
+    display: block;
 }

@@ -41,7 +41,157 @@ const form = document.createElement('form');
 form.setAttribute('id', 'order-form');
 
 form.appendChild(
-    createElement('h3', 'Order form'));
+    createElement('h3', 'Order form')
+);
+
+//APPEND ELEMENTS
+
+form.appendChild(
+    createField('name',
+        createLabel('name', 'name'),
+        createInput('name', 'text'),
+        {
+            event: 'blur',
+            requiredCheck: true,
+            callback: function (input) {
+                if (input.value.length < 4) {
+                    return 'The length of name should be not less than 4 symbols';
+                }
+                if (/[\d\s]/.test(input.value)) {
+                    return 'Name cannot contain numbers and spaces';
+                }
+            }
+        }
+    )
+);
+
+form.appendChild(
+    createField('surname',
+        createLabel('surname', 'surname'),
+        createInput('surname', 'text'),
+        {
+            event: 'blur',
+            requiredCheck: true,
+            callback: function (input) {
+                if (input.value.length < 5) {
+                    return 'The length of surname should be not less than 5 symbols';
+                }
+                if (/[\d\s]/.test(input.value)) {
+                    return 'Surname cannot contain numbers and spaces';
+                }
+            },
+        }
+    )
+);
+
+form.appendChild(
+    createField('delivery-date',
+        createLabel('delivery-date', 'delivery date'),
+        createInput('delivery-date', 'date'),
+        {
+            event: 'blur',
+            requiredCheck: true,
+            callback: function (input) {
+                if (input.value === '') {
+                    return 'Delivery date cannot be empty';
+                }
+                if (new Date(input.value) <= new Date()) {
+                    return 'Delivery date cannot be earlier than tomorrow';
+                }
+            },
+        }
+    )
+);
+
+form.appendChild(
+    createField('street',
+        createLabel('street', 'street'),
+        createInput('street', 'text'),
+        {
+            event: 'blur',
+            requiredCheck: true,
+            callback: function (input) {
+                if (input.value.length < 5) {
+                    return 'The length of street should be not less than 5 symbols';
+                }
+            },
+        }
+    )
+);
+
+form.appendChild(
+    createField('house',
+        createLabel('house', 'house'),
+        createInput('house', 'text'),
+        {
+            event: 'blur',
+            requiredCheck: true,
+            callback: function (input) {
+                if (input.value === '') {
+                    return 'House cannot be empty';
+                }
+                const houseInt = input.value * 1;
+                if (isNaN(houseInt) || houseInt < 0) {
+                    return 'House can contain only positive numbers';
+                }
+            },
+        }
+    )
+);
+
+form.appendChild(
+    createField('flat',
+        createLabel('flat', 'flat'),
+        createInput('flat', 'text'),
+        {
+            event: 'blur',
+            requiredCheck: true,
+            callback: function (input) {
+                if (input.value === '') {
+                    return 'Flat cannot be empty';
+                }
+                if (!/^\d+(-\d+)*$/.test(input.value)) {
+                    return 'Flat can contain only positive numbers with dashes';
+                }
+            },
+        }
+    )
+);
+
+form.appendChild(
+    createField('payment-method',
+        createHeader('payment method'),
+        createRadioList('payment-method', [{ label: 'cash', value: 'cash' }, { label: 'card', value: 'card' }]),
+        {
+            event: 'change',
+            requiredCheck: true,
+            callback: function (input) {
+                if (input.querySelector('input:checked') === null) {
+                    return 'You must choose payment method';
+                }
+            },
+        }))
+
+
+form.appendChild(
+    createField('gift',
+        createHeader('Choose 2 gifts'),
+        createCheckboxList('gift', [
+            { label: 'Pack as a gift', value: 'pack' },
+            { label: 'Add postcard', value: 'postcard' },
+            { label: 'Provide 2% discount to the next time', value: 'discount' },
+            { label: 'Branded pen or pencil', value: 'pencil' }
+        ]),
+        {
+            event: 'change',
+            requiredCheck: false,
+            callback: function (input) {
+                if (input.querySelectorAll('input:checked').length > 2) {
+                    return 'You can choose only 2 gifts';
+                }
+            },
+        }))
+
 
 //COMPLETE BTN
 const complete_btn = document.createElement('button');
@@ -49,87 +199,57 @@ complete_btn.setAttribute('type', 'submit');
 complete_btn.textContent = 'Complete';
 complete_btn.classList.add('btn');
 
-//APPEND ELEMENTS
-
-form.appendChild(
-    createField('name',
-        createLabel('name', 'name'),
-        createInput('name', 'text', 'field'),
-    )
-);
-
-form.appendChild(
-    createField('surname',
-        createLabel('surname', 'surname'),
-        createInput('surname', 'text', 'field'),
-    )
-);
-
-form.appendChild(
-    createField('delivery-date',
-        createLabel('delivery-date', 'delivery date'),
-        createInput('delivery-date', 'date'))
-);
-
-form.appendChild(
-    createField('street',
-        createLabel('street', 'street'),
-        createInput('street', 'text', 'field')
-    )
-);
-
-form.appendChild(
-    createField('house',
-        createLabel('house', 'house'),
-        createInput('house', 'text', 'field'),
-    )
-);
-
-form.appendChild(
-    createField('flat',
-        createLabel('flat', 'flat'),
-        createInput('flat', 'text', 'field'),
-    )
-);
-
-form.appendChild(
-    createField('payment-method',
-        createHeader('payment method'),
-        createRadioList('payment-method', [{ label: 'cash', value: 'cash' }, { label: 'card', value: 'card' }]))
-)
-
-form.appendChild(
-    createField('gift',
-        createHeader('Choose 2 gifts'),
-        createCheckboxList('gift',[
-            { label: 'Pack as a gift', value: 'pack' },
-            { label: 'Add postcard', value: 'postcard' },
-            { label: 'Provide 2% discount to the next time', value: 'discount' },
-            { label: 'Branded pen or pencil', value: 'pencil' }
-        ]))
-)
-
 form.appendChild(complete_btn);
 
 main_content.appendChild(form);
 
 
-function createField(id, label, input) {
+form.addEventListener('validate', () => {
+    if (form.querySelectorAll('.field.invalid, .field.not-checked').length) {
+        complete_btn.setAttribute('disabled', 'disabled');
+    } else {
+        complete_btn.removeAttribute('disabled');
+    }
+})
+
+//FUNCTION TO CREATE ELEMENTS
+
+function createField(id, label, input, validator) {
     let field = document.createElement('div');
     field.setAttribute('id', 'field-' + id);
+    field.classList.add('field');
 
-    appendChildren(field, label, input);
+    const errorMessage = document.createElement('div');
+    errorMessage.classList.add('error-message');
+
+    if (validator.requiredCheck) {
+        field.classList.add('not-checked');
+    }
+
+    input.addEventListener(validator.event, function () {
+        let error = validator.callback(input);
+
+        if (error === undefined) {
+            field.classList.remove('invalid');
+            errorMessage.innerHTML = '';
+        } else {
+            field.classList.add('invalid');
+            errorMessage.innerHTML = error;
+        }
+
+        field.classList.remove('not-checked');
+        form.dispatchEvent(new Event('validate'));
+    })
+
+    appendChildren(field, label, input, errorMessage);
     return field;
 }
 
-function createInput(id, type, className) {
+function createInput(id, type) {
     let input = document.createElement('input');
     input.setAttribute('id', 'input-' + id);
     input.setAttribute('name', id);
     input.setAttribute('type', type);
-    if (className !== undefined) {
-        input.classList.add('field');
-    }
     return input;
 }
 
@@ -190,3 +310,4 @@ function createCheckboxList(name, items) {
     }
     return checkbox;
 }
+
