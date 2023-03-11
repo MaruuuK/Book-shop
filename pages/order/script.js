@@ -205,10 +205,6 @@ form.appendChild(complete_btn);
 
 fragment.appendChild(form);
 
-//SUMMARIZED INFORMATION
-
-let sum_info = {};
-
 complete_btn.addEventListener('click',
     function () {
         const popup_msg = document.createElement('div');
@@ -234,7 +230,6 @@ complete_btn.addEventListener('click',
         popup_msg.classList.add('open');
     });
 
-main_content.appendChild(fragment);
 //FUNCTIONS TO CREATE ELEMENTS
 function createField(id, label, input, validator) {
     let field = document.createElement('div');
@@ -333,7 +328,7 @@ function createCheckboxList(name, items) {
     return checkbox;
 }
 
-form.addEventListener('validate', function() {
+form.addEventListener('validate', function () {
     if (form.querySelectorAll('.field.invalid, .field.not-checked').length) {
         complete_btn.setAttribute('disabled', 'disabled');
     } else {
@@ -341,6 +336,33 @@ form.addEventListener('validate', function() {
     }
 })
 
+//SUMMARIZED INFORMATION
+
+let sum_info = {};
+
+const popup_msg = document.createElement('div');
+popup_msg.setAttribute('class', 'popup-window');
+
 form.addEventListener('submit', e => {
+
+    const btn_back = document.createElement('a');
+    btn_back.setAttribute('href', '../../pages/main/index.html');
+    btn_back.classList.add('btn');
+    btn_back.classList.add('back');
+    btn_back.textContent = 'back to catalog';
+
+    appendChildren(popup_msg,
+        createElement('h3', 'Order has been created successfully!'),
+        createElement('p', `The delivery address is ${sum_info.street} street house ${sum_info.house} flat ${sum_info.flat}.`),
+        createElement('p', `Customer ${sum_info.name} ${sum_info.surname}.`),
+        btn_back);
+
+
+
+    document.querySelector('body').classList.add('overlay');
+    popup_msg.classList.add('open');
     e.preventDefault();
-})
+});
+
+fragment.appendChild(popup_msg);
+main_content.appendChild(fragment);
